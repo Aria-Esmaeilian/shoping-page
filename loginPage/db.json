@@ -1,0 +1,47 @@
+{
+  "users": [
+    {
+      "firstname": "Aria",
+      "lasttname": "Esmaeilian",
+      "email": "ariaesmailian@gmail.com",
+      "pass": "12345",
+      "id": "jpesvkHOjy8"
+    },
+    {
+      "firstname": "ali",
+      "lasttname": "taher",
+      "email": "ali@gmail.com",
+      "pass": "123321",
+      "id": "6mMXLnmK0hs"
+    },
+    {
+      "firstname": "sa",
+      "lasttname": "das",
+      "email": "sad@mkskd",
+      "pass": "1234",
+      "id": "2JA7QKq7hHA"
+    },
+    {
+      "firstname": "kgb",
+      "lasttname": "fndj",
+      "email": "sdfk@ldcpld",
+      "pass": "12345123",
+      "id": "jHXsuvASBcY"
+    },
+    {
+      "firstname": "Sara",
+      "lasttname": "Ahmadi",
+      "email": "saraahmadi@gmail.com",
+      "pass": "sara1234",
+      "id": "HYZIkA_UXVU"
+    },
+    {
+      "firstname": "alex",
+      "lasttname": "brown",
+      "email": "alx.br@gmail.com",
+      "pass": "12345678",
+      "id": "sR2dJbZKaWk"
+    }
+  ],
+  "$schema": "./node_modules/json-server/schema.json"
+}
