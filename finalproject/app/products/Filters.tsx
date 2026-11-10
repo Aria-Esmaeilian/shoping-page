@@ -27,12 +27,34 @@ const sizes = [
   "4X-Large",
 ];
 
-export default function Filters() {
+type FiltersProps = {
+  minPrice: number;
+  maxPrice: number;
+  query: string;
+  sort: string;
+  style: string;
+};
+
+export default function Filters({
+  minPrice,
+  maxPrice,
+  query,
+  sort,
+  style,
+}: FiltersProps) {
   const [selectedColor, setSelectedColor] = useState("#063AF5");
   const [selectedSize, setSelectedSize] = useState("Large");
 
   return (
-    <aside className="w-[295px] shrink-0 border border-gray-200 rounded-3xl p-5">
+    <form
+      action="/products"
+      method="GET"
+      className="w-[295px] shrink-0 border border-gray-200 rounded-3xl p-5"
+    >
+      <input type="hidden" name="q" value={query} />
+      <input type="hidden" name="sort" value={sort} />
+      <input type="hidden" name="page" value="1" />
+
       <div className="flex justify-between items-center pb-5 border-b border-gray-200">
         <h2 className="font-bold text-xl">Filters</h2>
         <span className="text-gray-500 text-xl">☷</span>
@@ -44,19 +66,30 @@ export default function Filters() {
           <span>⌃</span>
         </summary>
 
-        <div className="mt-6">
-          <input
-            type="range"
-            min="50"
-            max="200"
-            defaultValue="150"
-            className="w-full accent-black cursor-pointer"
-          />
+        <div className="mt-5 grid grid-cols-2 gap-3">
+          <label className="text-xs text-gray-500">
+            Minimum
+            <input
+              type="number"
+              name="minPrice"
+              min="0"
+              max="2000"
+              defaultValue={minPrice}
+              className="w-full border border-gray-200 rounded-lg p-2 mt-2 text-black outline-none"
+            />
+          </label>
 
-          <div className="flex justify-between mt-3 text-sm font-medium">
-            <span>$50</span>
-            <span>$200</span>
-          </div>
+          <label className="text-xs text-gray-500">
+            Maximum
+            <input
+              type="number"
+              name="maxPrice"
+              min="0"
+              max="2000"
+              defaultValue={maxPrice}
+              className="w-full border border-gray-200 rounded-lg p-2 mt-2 text-black outline-none"
+            />
+          </label>
         </div>
       </details>
 
@@ -125,27 +158,32 @@ export default function Filters() {
         </summary>
 
         <div className="flex flex-col gap-4 mt-5 text-sm text-gray-500">
-          <p className="flex justify-between cursor-pointer">
-            Casual <span>›</span>
-          </p>
-          <p className="flex justify-between cursor-pointer">
-            Formal <span>›</span>
-          </p>
-          <p className="flex justify-between cursor-pointer">
-            Party <span>›</span>
-          </p>
-          <p className="flex justify-between cursor-pointer">
-            Gym <span>›</span>
-          </p>
+          {["Casual", "Formal", "Party", "Gym"].map((item) => (
+            <button
+              key={item}
+              type="submit"
+              name="style"
+              value={item}
+              formAction="/products"
+              className={`flex justify-between cursor-pointer hover:text-black ${
+                style === item ? "text-black font-bold" : ""
+              }`}
+            >
+              {item}
+              <span>›</span>
+            </button>
+          ))}
         </div>
       </details>
 
       <button
-        type="button"
+        type="submit"
+        name="style"
+        value={style}
         className="w-full bg-black text-white rounded-full py-4 font-medium hover:bg-gray-800 transition cursor-pointer"
       >
         Apply Filter
       </button>
-    </aside>
+    </form>
   );
 }

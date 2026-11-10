@@ -2,6 +2,22 @@ import CustomerReviews from "@/components/CustomerReviews";
 import ProductCard from "@/components/ProductCard";
 import Image from "next/image";
 import Link from "next/link";
+import { Suspense } from "react";
+
+function ProductSkeleton() {
+  return (
+    <div className="w-full max-w-7xl grid grid-cols-4 gap-5 animate-pulse">
+      {Array.from({ length: 4 }).map((_, i) => (
+        <div key={i} className="w-full min-w-0">
+          <div className="w-full aspect-square bg-gray-200 rounded-2xl mb-4" />
+          <div className="h-5 w-4/5 bg-gray-200 rounded mb-3" />
+          <div className="h-4 w-2/5 bg-gray-200 rounded mb-3" />
+          <div className="h-6 w-1/2 bg-gray-200 rounded" />
+        </div>
+      ))}
+    </div>
+  );
+}
 
 export default function Home() {
   return (
@@ -36,9 +52,11 @@ export default function Home() {
             style.
           </p>
 
-          <button className="mt-8 bg-black text-white rounded-full px-16 py-4 hover:bg-gray-800 active:scale-95 transition-all duration-200 cursor-pointer">
-            Shop Now
-          </button>
+          <Link href="/products">
+            <button className="mt-8 bg-black text-white rounded-full px-16 py-4 hover:bg-gray-800 active:scale-95 transition-all duration-200 cursor-pointer">
+              Shop Now
+            </button>
+          </Link>
 
           <div className="flex items-center gap-6 mt-16 w-146">
             <div>
@@ -64,23 +82,65 @@ export default function Home() {
       </section>
 
       <section className="h-31 bg-black w-full flex justify-between items-center px-20">
-        <Image src="/Bg/versace.png" alt="Versace" width={156} height={36} />
-        <Image src="/Bg/zara.png" alt="Zara" width={91} height={38} />
-        <Image src="/Bg/gucci.png" alt="Gucci" width={166} height={33} />
-        <Image src="/Bg/prada.png" alt="Prada" width={194} height={32} />
-        <Image
-          src="/Bg/calvin.png"
-          alt="Calvin Klein"
-          width={206}
-          height={33}
-        />
+        <Link href="/products?q=Versace">
+          <Image
+            src="/Bg/versace.png"
+            alt="Versace"
+            width={156}
+            height={36}
+            className="cursor-pointer hover:scale-105 transition-transform"
+          />
+        </Link>
+
+        <Link href="/products?q=Zara">
+          <Image
+            src="/Bg/zara.png"
+            alt="Zara"
+            width={91}
+            height={38}
+            className="cursor-pointer hover:scale-105 transition-transform"
+          />
+        </Link>
+
+        <Link href="/products?q=Gucci">
+          <Image
+            src="/Bg/gucci.png"
+            alt="Gucci"
+            width={166}
+            height={33}
+            className="cursor-pointer hover:scale-105 transition-transform"
+          />
+        </Link>
+
+        <Link href="/products?q=Prada">
+          <Image
+            src="/Bg/prada.png"
+            alt="Prada"
+            width={194}
+            height={32}
+            className="cursor-pointer hover:scale-105 transition-transform"
+          />
+        </Link>
+
+        <Link href="/products?q=Calvin+Klein">
+          <Image
+            src="/Bg/calvin.png"
+            alt="Calvin Klein"
+            width={206}
+            height={33}
+            className="cursor-pointer hover:scale-105 transition-transform"
+          />
+        </Link>
       </section>
-      <section className="w-full flex  flex-col justify-between items-center">
+
+      <section className="w-full flex flex-col justify-between items-center">
         <h2 className="font-[heavyFont] mt-19 mb-15 text-[48px] cursor-default">
           NEW ARRIVALS
         </h2>
 
-        <ProductCard skip={0} />
+        <Suspense fallback={<ProductSkeleton />}>
+          <ProductCard skip={0} />
+        </Suspense>
 
         <Link
           href="/products"
@@ -91,12 +151,15 @@ export default function Home() {
 
         <div className="w-full max-w-7xl border-b border-gray-300"></div>
       </section>
+
       <section className="w-full flex flex-col justify-between items-center">
         <h2 className="font-[heavyFont] mt-19 mb-15 text-[48px] cursor-default">
-          TOP SELLING{" "}
+          TOP SELLING
         </h2>
 
-        <ProductCard skip={4} />
+        <Suspense fallback={<ProductSkeleton />}>
+          <ProductCard skip={4} />
+        </Suspense>
 
         <Link
           href="/products"
@@ -112,59 +175,68 @@ export default function Home() {
         </h2>
 
         <div className="grid grid-cols-11 gap-5">
-          <div className="group col-span-4 h-[258px] relative bg-white rounded-3xl overflow-hidden cursor-pointer transition-all duration-300 hover:-translate-y-2 hover:shadow-xl active:scale-[0.97]">
+          <Link
+            href="/products?style=Casual"
+            className="group col-span-4 h-[258px] relative bg-white rounded-3xl overflow-hidden cursor-pointer transition-all duration-300 hover:-translate-y-2 hover:shadow-xl active:scale-[0.97]"
+          >
             <p className="absolute top-6 left-8 z-10 text-[32px] font-medium">
               Casual
             </p>
-
             <Image
               src="/Bg/casual.png"
               alt="Casual Style"
               fill
               className="object-cover transition-transform duration-500 group-hover:scale-110"
             />
-          </div>
+          </Link>
 
-          <div className="group col-span-7 h-[258px] relative bg-white rounded-3xl overflow-hidden cursor-pointer transition-all duration-300 hover:-translate-y-2 hover:shadow-xl active:scale-[0.97]">
+          <Link
+            href="/products?style=Formal"
+            className="group col-span-7 h-[258px] relative bg-white rounded-3xl overflow-hidden cursor-pointer transition-all duration-300 hover:-translate-y-2 hover:shadow-xl active:scale-[0.97]"
+          >
             <p className="absolute top-6 left-8 z-10 text-[32px] font-medium">
               Formal
             </p>
-
             <Image
               src="/Bg/formal.png"
               alt="Formal Style"
               fill
               className="object-cover transition-transform duration-500 group-hover:scale-110"
             />
-          </div>
+          </Link>
 
-          <div className="group col-span-7 h-[258px] relative bg-white rounded-3xl overflow-hidden cursor-pointer transition-all duration-300 hover:-translate-y-2 hover:shadow-xl active:scale-[0.97]">
+          <Link
+            href="/products?style=Party"
+            className="group col-span-7 h-[258px] relative bg-white rounded-3xl overflow-hidden cursor-pointer transition-all duration-300 hover:-translate-y-2 hover:shadow-xl active:scale-[0.97]"
+          >
             <p className="absolute top-6 left-8 z-10 text-[32px] font-medium">
               Party
             </p>
-
             <Image
               src="/Bg/party.png"
               alt="Party Style"
               fill
               className="object-cover transition-transform duration-500 group-hover:scale-110"
             />
-          </div>
+          </Link>
 
-          <div className="group col-span-4 h-[258px] relative bg-white rounded-3xl overflow-hidden cursor-pointer transition-all duration-300 hover:-translate-y-2 hover:shadow-xl active:scale-[0.97]">
+          <Link
+            href="/products?style=Gym"
+            className="group col-span-4 h-[258px] relative bg-white rounded-3xl overflow-hidden cursor-pointer transition-all duration-300 hover:-translate-y-2 hover:shadow-xl active:scale-[0.97]"
+          >
             <p className="absolute top-6 left-8 z-10 text-[32px] font-medium">
               Gym
             </p>
-
             <Image
               src="/Bg/gym.png"
               alt="Gym Style"
               fill
               className="object-cover transition-transform duration-500 group-hover:scale-110"
             />
-          </div>
+          </Link>
         </div>
       </section>
+
       <CustomerReviews />
     </>
   );

@@ -11,6 +11,7 @@ import { CartItem } from "@/types/cart";
 
 type CartContextType = {
   cart: CartItem[];
+  loaded: boolean;
   addToCart: (item: CartItem) => void;
   removeFromCart: (id: number, size: string, color: string) => void;
   updateQuantity: (
@@ -116,6 +117,7 @@ export function CartProvider({ children }: { children: ReactNode }) {
         updateQuantity,
         clearCart,
         totalItems,
+        loaded,
       }}
     >
       {children}
