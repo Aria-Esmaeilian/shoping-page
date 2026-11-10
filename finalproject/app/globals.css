@@ -1,0 +1,46 @@
+@import "tailwindcss";
+
+:root {
+  --background: #ffffff;
+  --foreground: #171717;
+}
+header {
+  position: relative;
+  z-index: 50;
+}
+
+@theme inline {
+  --color-background: var(--background);
+  --color-foreground: var(--foreground);
+  --font-sans: Arial, Helvetica, sans-serif;
+  --font-mono: var(--font-geist-mono);
+}
+
+@font-face {
+  font-family: "heavyFont";
+  src: url("/Integral-CF-Font/Demo_Fonts/Fontspring-DEMO-integralcf-heavy.otf")
+    format("opentype");
+  font-weight: 900;
+  font-style: normal;
+}
+@font-face {
+  font-family: "regsatoshi";
+  src: url("/Satoshi_Complete/Fonts/WEB/fonts/Satoshi-Regular.woff2")
+    format("woff2");
+  font-weight: 400;
+  font-style: normal;
+}
+
+@font-face {
+  font-family: "boldsatoshi";
+  src: url("/Satoshi_Complete/Fonts/otf/fonts/Satoshi-Bold.otf")
+    format("opentype");
+  font-weight: 900;
+  font-style: normal;
+}
+
+body {
+  background: #ffffff;
+  color: #171717;
+  font-family: Arial, Helvetica, sans-serif;
+}
